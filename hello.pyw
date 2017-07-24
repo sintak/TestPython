@@ -293,7 +293,7 @@ print(random.random())
 print(random.choice(range(10)))
 
 
-#
+# 
 print()
 print("=======欢迎进入狗狗年龄对比系统========")
 while True:
