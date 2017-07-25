@@ -45,8 +45,13 @@ paragraph = """这是一个段落，
  可以由多行组成"""
 print(paragraph)
 print(r"this is a line with \n")
+print ("我叫 %s 今年 %d 岁!" % ('小明', 10))
+print("{} {}".format("hello", "world"))
+print("{1} {0} {1}".format("hello", "world"))
+# format 格式化函数更多见https://www.runoob.com/python/att-string-format.html
 
 # 一行多语句用分号;分割
+print()
 import sys; x = 'runoob'; sys.stdout.write(x + '\n')
 
 # 不换行输出
@@ -112,15 +117,15 @@ print(2 ** 4)
 
 
 print()
-str = 'Runoob'
+str1 = 'Runoob'
  
-print (str)          # 输出字符串
-print (str[0:-1])    # 输出第一个到倒数第二个的所有字符
-print (str[0])       # 输出字符串第一个字符
-print (str[2:5])     # 输出从第三个开始到第五个的字符
-print (str[2:])      # 输出从第三个开始的后的所有字符
-print (str * 2)      # 输出字符串两次
-print (str + "TEST") # 连接字符串
+print (str1)          # 输出字符串
+print (str1[0:-1])    # 输出第一个到倒数第二个的所有字符
+print (str1[0])       # 输出字符串第一个字符
+print (str1[2:5])     # 输出从第三个开始到第五个的字符
+print (str1[2:])      # 输出从第三个开始的后的所有字符
+print (str1 * 2)      # 输出字符串两次
+print (str1 + "TEST") # 连接字符串
 
 
 print()
@@ -149,7 +154,7 @@ print(a)
 # append(), pop()
 
 
-# Tuple 元组（tuple）与列表类似，不同之处在于元组的元素不能修改
+# Tuple 元组（tuple）与列表类似，不同之处在于元组的元素不能修改(即当作常量来用)
 print()
 tuple = ( 'abcd', 786 , 2.23, 'runoob', 70.2  )
 tinytuple = (123, 'runoob', a)
@@ -166,7 +171,7 @@ print (tuple + tinytuple) # 连接元组
 
 # string、list和tuple都属于sequence（序列）。
 
-# Set 
+# Set 集合  （具有唯一值的列表）
 print()
 student = {'Tom', 'Jim', 'Mary', 'Tom', 'Jack', 'Rose'}  # 可以使用大括号 { } 或者 set() 函数创建集合，
 studen1 = set() # 注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。
@@ -195,7 +200,7 @@ print("a和b的交集", a & b)     # a和b的交集
 print("a和b中不同时存在的元素", a ^ b)     # a和b中不同时存在的元素
 
 
-# Dictionary
+# Dictionary 字典
 print()
 dict1 = {}
 dict1['one'] = "1 - 菜鸟教程"
@@ -298,7 +303,8 @@ print()
 print("=======欢迎进入狗狗年龄对比系统========")
 while True:
     try:
-        age = int(input("请输入您家狗的年龄:"))
+        # age = int(input("请输入您家狗的年龄:"))
+        age = int(3)
         print(" ")
         age = float(age)
         if age < 0:
@@ -317,7 +323,202 @@ while True:
         print("输入不合法，请输入有效年龄")
 
 
-i1 = input("\n\n按下 enter 键后退出。")
-print(i1)
+# 迭代器
+list=[1,2,3,4]
+it = iter(list)    # 创建迭代器对象
+for x in it:
+    print (x, end=" ")
+
+print()
+
+import sys         # 引入 sys 模块
+
+list=[1,2,3,4]
+it = iter(list)    # 创建迭代器对象
+
+while True:
+    try:
+        print (next(it))
+    except StopIteration:
+        print("StopIteration")
+        # sys.exit()
+        break
 
 
+# 生成器
+import sys
+
+def fibonacci(n): # 生成器函数 - 斐波那契
+    a, b, counter = 0, 1, 0
+    while True:
+        if (counter > n): 
+            return
+        yield a
+        a, b = b, a + b
+        counter += 1
+f = fibonacci(10) # f 是一个迭代器，由生成器返回生成
+
+while True:
+    try:
+        print (next(f), end=" ")
+    except StopIteration:
+        # sys.exit()
+        break
+
+# 循环
+print()
+count = 0
+while 10 < 5:
+   print (count, " 小于 5")
+   count = count + 1
+else:
+   print (count, " 大于或等于 5")  # 退出循环时会执行（始终执行）
+
+
+sites = ["Baidu", "Google","Runoob","Taobao"]
+for site in sites:  # for in 设计只用来遍历数据，如列表集合元组字符串等
+    if site == "Runoob":
+        print("菜鸟教程!")
+        break
+    print("循环数据 " + site)
+else:
+    print("没有循环数据!")  # 没有可遍历数据时才执行
+print("完成循环!")
+
+
+# lambda
+print()
+sum = lambda arg1, arg2: arg1 + arg2 # 只支持一行
+print ("相加后的值为 : ", sum( 10, 20 ))
+
+
+# 函数
+print()
+def test():
+    return # None
+
+print(test())
+
+var1 = 33
+def outer():
+    # print(var1)  # 变量在内部使用过后，就不能再用global去修饰了
+    global var1
+    var1 = 44
+    print("outer: ", var1)
+
+outer()
+print(var1)
+
+
+def outer():
+    num = 10
+    def inner():
+        nonlocal num   # nonlocal关键字声明
+        num = 100
+        print(num)
+    inner()
+    print(num)
+outer()
+
+# 
+print()
+from collections import deque
+queue = deque(["Eric", "John", "Michael"])
+print(queue.append("Terry"))           # Terry arrives
+print(queue.append("Graham"))          # Graham arrives
+print(queue.popleft())                 # The first to arrive now leaves
+print(queue.popleft())                 # The second to arrive now leaves
+print(queue.pop())                     # 
+print(queue)
+
+# 列表推导式 (从序列创建列表)  (类似C#的select)
+print()
+vec = [2, 4, 6, '8']
+val = [x*3 for x in vec]
+print(val)
+val = [[x*3, int(x)*3] for x in vec if int(x) > 5]
+print(val)
+
+## 循环和其它技巧
+print()
+vec1 = [2, 4, 6]
+vec2 = [4, 3, -9]
+[x*y for x in vec1 for y in vec2] # [8, 6, -18, 16, 12, -36, 24, 18, -54]
+[x+y for x in vec1 for y in vec2] # [6, 5, -7, 8, 7, -5, 10, 9, -3]
+[vec1[i]*vec2[i] for i in range(len(vec1))] # [8, 12, -54]
+
+print([str(round(355/113, i)) for i in range(1, 6)])
+print({str(round(355/113, i)) for i in range(1, 6)})  # 集合的元素位置不固定
+
+#
+print()
+matrix = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12],
+    ]
+print([[row[i] for row in matrix] for i in range(4)])  # [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+
+transposed = []
+for i in range(4):
+    transposed.append([row[i] for row in matrix])
+
+print(transposed)  # [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+
+
+# del
+print()
+a = [-1, 1, 66.25, 333, 333, 1234.5]
+del a[2:4]
+print(a)
+
+
+# 元组和序列
+t = 12345, 54321, 'hello!'
+print(t)
+print(t[0])
+u = t, (1, 2, 3, 4, 5)
+print(u)
+
+
+# 遍历技巧
+knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+for k, v in knights.items():  # items()
+    print(k, v)
+
+for i, v in enumerate(['tic', 'tac', 'toe']):  # enumerate()
+    print(i, v)
+
+questions = ['name', 'quest', 'favorite color']
+answers = ['lancelot', 'the holy grail', 'blue']
+for q, a in zip(questions, answers):  # zip()
+    print('What is your {0}?  It is {1}.'.format(q, a))
+
+for i in reversed(range(1, 10, 2)):  # reversed sorted
+    print(i)
+
+
+# 模块
+print(__name__)
+
+import Support
+
+Support.print_func("Kode")
+print(Support.__name__)
+print(Support.__file__)
+print(Support.__ffgg__)
+
+print(dir())
+print(dir(Support))
+values = dir(Support)
+for val in values:
+    print(eval("Support.{}".format(val)))
+
+import sys
+print(sys.ps1)
+print(sys.ps2)
+
+# 包
+import item.subitem.subsubitem  # 最后项subsubitem只能是包或模块
+from package import item  # item可以是任意（包/模块/函数/类/变量）
+# 两种方法比较： 后者仅仅是在使用时书写较少的前缀而已，而且可能带来副作用
