@@ -514,11 +514,34 @@ values = dir(Support)
 for val in values:
     print(eval("Support.{}".format(val)))
 
-import sys
-print(sys.ps1)
-print(sys.ps2)
+# import sys
+# print(sys.ps1)
+# print(sys.ps2)
 
 # 包
-import item.subitem.subsubitem  # 最后项subsubitem只能是包或模块
-from package import item  # item可以是任意（包/模块/函数/类/变量）
-# 两种方法比较： 后者仅仅是在使用时书写较少的前缀而已，而且可能带来副作用
+# import item.subitem.subsubitem  # 最后项subsubitem只能是包或模块
+# from package import item  # item可以是任意（包/模块/函数/类/变量）
+# # 两种方法比较： 后者仅仅是在使用时书写较少的前缀而已，而且可能带来副作用
+
+
+#
+print()
+class A:
+    def __init__(self):
+        print(222, self)
+
+    def test():
+        return
+
+a = A()
+print(1111, a)
+print(1111, a.__init__)
+
+
+#
+print()
+d = {'a': 1, 'b': "2", True: [3, 4], 11: 1111}
+print(d[True])
+print(d[11])
+for k,v in d.items():
+    print(k, v)
