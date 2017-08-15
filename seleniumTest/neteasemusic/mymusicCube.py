@@ -11,7 +11,7 @@ def statistics(lst):
     for k in lst:  
         # if not k.decode('utf-8') in dic:dic[k.decode('utf-8')] = 0  
         # dic[k.decode('utf-8')] +=1
-        if not k in dic:dic[k] = 0  
+        if not k in dic: dic[k] = 0  
         dic[k] +=1
     return dic  
 
